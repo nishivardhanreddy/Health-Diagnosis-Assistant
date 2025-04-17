@@ -24,7 +24,7 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub') {
+                    docker.withRegistry('', 'docker_hub_credentials') {
                         echo 'Logged in to Docker Hub'
                     }
                 }
@@ -34,7 +34,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub') {
+                    docker.withRegistry('', 'docker_hub_credentials') {
                         dockerImage.push()
                     }
                 }

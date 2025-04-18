@@ -44,11 +44,11 @@ pipeline {
         stage('Deploy Docker Container') {
             steps {
                 script {
-                    sh '''
-                        docker rm -f disease-predictor-container || true
-                        docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
-                        docker run -d --name disease-predictor-container -p 8501:8501 ${DOCKER_IMAGE}:${DOCKER_TAG}
-                    '''
+                    bat '''
+                        docker rm -f disease-predictor-container || exit 0
+                        docker pull %DOCKER_IMAGE%:%DOCKER_TAG%
+                        docker run -d --name disease-predictor-container -p 8501:8501 %DOCKER_IMAGE%:%DOCKER_TAG%
+                        '''
                 }
             }
         }
